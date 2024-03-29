@@ -335,23 +335,23 @@ func SendMail(addr string, a Auth, from string, to []string, msg []byte) error {
 	if err = c.hello(); err != nil {
 		return err
 	}
-	if ok, _ := c.Extension("STARTTLS"); ok {
-		config := &tls.Config{ServerName: c.serverName}
-		if testHookStartTLS != nil {
-			testHookStartTLS(config)
-		}
-		if err = c.StartTLS(config); err != nil {
-			return err
-		}
-	}
-	if a != nil && c.ext != nil {
-		if _, ok := c.ext["AUTH"]; !ok {
-			return errors.New("smtp: server doesn't support AUTH")
-		}
-		if err = c.Auth(a); err != nil {
-			return err
-		}
-	}
+	// if ok, _ := c.Extension("STARTTLS"); ok {
+	// 	config := &tls.Config{ServerName: c.serverName}
+	// 	if testHookStartTLS != nil {
+	// 		testHookStartTLS(config)
+	// 	}
+	// 	if err = c.StartTLS(config); err != nil {
+	// 		return err
+	// 	}
+	// }
+	// if a != nil && c.ext != nil {
+	// 	if _, ok := c.ext["AUTH"]; !ok {
+	// 		return errors.New("smtp: server doesn't support AUTH")
+	// 	}
+	// 	if err = c.Auth(a); err != nil {
+	// 		return err
+	// 	}
+	// }
 	if err = c.Mail(from); err != nil {
 		return err
 	}
